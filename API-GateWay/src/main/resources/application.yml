@@ -1,0 +1,30 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: api-gateway
+  main:
+    web-application-type: reactive
+  cloud:
+    gateway:
+      server:
+        webflux:
+          default-filters:
+            - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin, RETAIN_FIRST
+          routes:
+            - id: auth-service
+              uri: lb://auth-service
+              predicates:
+                - Path=/auth/**
+            - id: pet-service
+              uri: lb://pet-service
+              predicates:
+                - Path=/pets/**
+              filters:
+                - RemoveRequestHeader=Cookie
+                - PreserveHostHeader
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka

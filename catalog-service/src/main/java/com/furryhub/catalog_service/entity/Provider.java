@@ -1,0 +1,4 @@
+package com.furryhub.catalog_service.entity;
+
+public class Provider {
+}
