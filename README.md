@@ -34,8 +34,8 @@ It uses **Spring Boot, PostgreSQL, Kafka, and API Gateway** with JWT authenticat
 | Service                  | Port | Description |
 |--------------------------|------|-------------|
 | **auth-service**         | 8081 | User authentication & JWT |
-| **catalog-service**      | 8082 | Providers & service types |
-| **pet-service**          | 8083 | Manage user pets |
+| **catalog-service**      | 8083 | Providers & service types |
+| **pet-service**          | 8086 | Manage user pets |
 | **booking-service**      | 8084 | Booking lifecycle |
 | **notification-service** | 8085 | User/provider notifications |
 | **api-gateway**          | 8080 | Gateway entry point |
@@ -130,10 +130,20 @@ mvn spring-boot:run -pl api-gateway
 
 ## 🧪 Testing with Postman
 
-1. Import `furryhub.postman_collection.json` into Postman.  
-2. **Register & Login** → copy the JWT token from `/auth/login`.  
-3. Use the JWT as **Bearer Token** in Postman (Authorization tab).  
-4. Try the booking flow:  
-   - User creates a booking  
-   - Provider accepts  
-   - Notification is generated and available at `/notifications`.  
+This repo includes ready-to-use Postman collections.
+
+### Import into Postman
+1. Go to **Postman → Import**.
+2. Import both files from `/postman` folder:
+   - `furryhub.postman_collection.json`
+   - `furryhub.postman_environment.json`
+
+### Usage
+- Select the **FurryHub Local** environment.
+- Register/Login via `Auth` requests.
+- Copy the JWT (done automatically in Postman via variable).
+- Test **Providers, Pets, Bookings, Notifications** end-to-end.
+
+### Files
+- **Postman Collection** → `/postman/furryhub.postman_collection.json`
+- **Environment Variables** → `/postman/furryhub.postman_environment.json`
